@@ -143,7 +143,7 @@ cogs.cep.getClient('cogs-client.json')
 });
 ```
 
-See [full CEP client documentation](https://github.com/cogswell-io/node-cogs-javascript-sdk/blob/master/CEPT_CLIENT.md) for more information.
+See [full CEP client documentation](https://github.com/cogswell-io/node-cogs-javascript-sdk/blob/master/CEP_CLIENT.md) for more information.
 
 ## cogs.pubsub
 All of these routes are authenticated using the pubsub project_key. These keys are generated in the pubsub portion of the admin panel on Cogswell. Every key has an associated read_key, write_key, and admin_key. 
