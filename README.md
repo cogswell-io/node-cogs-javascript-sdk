@@ -22,4 +22,4 @@ The client SDK requires that the `api_key.access`, `client_key.salt`, and `clien
 
 ## API Documentation
 
-[full Cogs API ](https://github.com/cogswell-io/node-cogs-javascript-sdk/blob/master/API.md)
+[Full Cogs API ](https://github.com/cogswell-io/node-cogs-javascript-sdk/blob/master/API.md)
