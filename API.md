@@ -4,8 +4,6 @@
 
 <!-- toc -->
 - [Cogs SDK](#cogs-sdk)
-  - [`version`](#version)
-  - [`configuration`](#configuration)
   - [cogs.info](#cogsinfo)
     - [`cogs.info.getApiDocs()`](#cogsinfogetapidocs)
     - [`cogs.info.getBuildInfo()`](#cogsinfogetbuildinfo)
