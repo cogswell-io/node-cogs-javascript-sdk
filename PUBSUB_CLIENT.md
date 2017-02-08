@@ -7,13 +7,13 @@
   - [connection.publish(channelName, message, [errorHandler])](#connectionpublishchannelname-message-errorhandler)
   - [connection.publishWithAck(channelName, message)](#connectionpublishwithackchannelname-message)
   - [connection.close()](#connectionclose)
-  - [Events Emitted for Pub/Sub Connection](#events-emitted-for-pubsub-connection)
-    - [connection.on('raw-record', handler)](#connection-on-raw-record-handler)
-    - [connection.on('message', handler)](#connectiononmessage-handler)
-    - [connection.on('error', handler)](#connectiononerror-handler)
-    - [connection.on('reconnect', handler)](#connectiononreconnect-handler)
-    - [connection.on('close', handler)](#connectiononclose-handler))
-    - [connection.on('new-session', handler)](#connectiononnew-session-handler)
+  - [Connection Events](#events-emitted-for-pubsub-connection)
+    - [Event: 'raw-record'](#event-raw-record)
+    - [Event: 'message'](#event-message)
+    - [Event: 'error'](#event-error)
+    - [Event: 'reconnect'](#event-reconnect)
+    - [Event: 'close'](#event-close)
+    - [Event: 'new-session'](#event-new-session)
 <!-- tocstop -->
 
 # Cogs Pub/Sub Connection API
@@ -103,22 +103,22 @@ connection.close()
 
 })
 ```
-## Events Emitted for Pub/Sub Connection
+## Connection Events
 
-### connection.on('raw-record', handler)
-Register a handler for any raw record received from the server, whether a response to a request or a message. This is mostly useful for debugging issues with server communication.
+### Event: 'raw-record'
+The 'raw-record' event is emitted for every raw record received from the server, whether a response to a request or a message. This is mostly useful for debugging issues with server communication.
 
-### connection.on('message', handler)
-Register a handler for messages from any channel.
+### Event: 'message'
+The 'message' event is emitted whenever the socket receives messages from any channel.
 
-### connection.on('error', handler)
-Register a handler for connection errors, failed publishes, etc.
+### Event: 'error'
+The 'error' event is emitted on any connection errors, failed publishes, etc.
 
-### connection.on('reconnect', handler)
-Register a handler for reconnect events.
+### Event: 'reconnect'
+The 'reconnect' event is emitted on socket reconnection if it disconnected for any reason.
 
-### connection.on('close', handler)
-Register a handler for close events.
+### Event: 'close'
+The 'close' event is emitted whenever the socket conenction closes.
 
-### connection.on('new-session', handler)
-Register a handler for new session events. This indicates that the session associated with this connection is not a resumed session, therefore there are no subscriptions associated with this session. If there had been a previous session and the connection was replaced by an auto-reconnect, the previous session was not restored resulting in all subscriptions being lost.
+### Event: 'new-session'
+The 'new-session' event indicates that the session associated with this connection is not a resumed session, therefore there are no subscriptions associated with this session. If there had been a previous session and the connection was replaced by an auto-reconnect, the previous session was not restored resulting in all subscriptions being lost.
