@@ -11,13 +11,13 @@
     - [`cogs.info.getBuildInfo()`](#cogsinfogetbuildinfo)
   - [cogs.tools](#cogstools)
     - [cogs.tools.getNamespaceSchema(namespace)](#cogstoolsgetnamespaceschemanamespace)
-    - [cogs.tools.getRandomUuid()](#cogstoolsgetrandomuuid)
-    - [cogs.tools.newClientKey()](#cogstoolsnewclientkey)
+    - [cogs.tools.getRandomUuid()](cogstoolsgetrandomuuid)
+    - [cogs.tools.newClientKey()](cogstoolsnewclientkey)
   - [cogs.cep](#cogscep)
     - [cogs.cep.getClient(config)](#cogscepgetclientconfig)
   - [cogs.pubsub](#cogspubsub)
     - [cogs.pubsub.connect(keys, [options])](#cogspubsubconnectkeys-options)
-  - [Cogs Command Line Utility](#cogs-command-line-utility)
+  - [Cogs Command Line Utility](cogs-command-line-utility)
 
 <!-- tocstop -->
 
