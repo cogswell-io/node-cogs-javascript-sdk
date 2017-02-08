@@ -1,21 +1,3 @@
-<!-- toc -->
-- [Cogs Pub/Sub Connection API](#cogs-pubsub-connection-api)
-  - [connection.getSessionUuid()](#connectiongetsessionuuid)
-  - [connection.subscribe(channelName, messageHandler)](#connectionsubscribechannelname-messagehandler)
-  - [connection.unsubscribe(channelName)](#connectionunsubscribechannelname)
-  - [connection.listSubscriptions()](#connectionlistsubscriptions)
-  - [connection.publish(channelName, message, [errorHandler])](#connectionpublishchannelname-message-errorhandler)
-  - [connection.publishWithAck(channelName, message)](#connectionpublishwithackchannelname-message)
-  - [connection.close()](#connectionclose)
-  - [Events Emitted for Pub/Sub Connection](#events-emitted-for-pubsub-connection)
-    - [connection.on('raw-record', handler)](#connection-on-raw-record-handler)
-    - [connection.on('message', handler)](#connectiononmessage-handler)
-    - [connection.on('error', handler)](#connectiononerror-handler)
-    - [connection.on('reconnect', handler)](#connectiononreconnect-handler)
-    - [connection.on('close', handler)](#connectiononclose-handler))
-    - [connection.on('new-session', handler)](#connectiononnew-session-handler)
-<!-- tocstop -->
-
 # Cogs Pub/Sub Connection API
 This is a summary of all functions exposed by the pubsub connection object, and examples of each being used.
 
