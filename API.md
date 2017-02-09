@@ -161,7 +161,7 @@ var adminKey = 'A-deadbeefdeadbeef-deadbeefdeadbeefdeadbeefdeadbeef'
 //All of the default options
 var options = {
   sessionUuid: "", //Provide a session ID to restore an old connected session
-  baseWsUrl: 'wss://api.cogswell.io',
+  url: 'wss://api.cogswell.io/pubsub',
   connectTimeout: 5000,
   autoReconnect = true, //reconnect on failure
   pingInterval = 15000, //frequency at which websocket pings
