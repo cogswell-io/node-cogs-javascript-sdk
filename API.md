@@ -73,7 +73,7 @@ cogs.info.getClient('cogs-tools.json')
 All of these routes are authenticated using the access_key and secret_key.
 
 ### cogs.tools.getNamespaceSchema(namespace)
-Use this endpoint to fetch the schema for one of your namespaces. This includes the attributes for that namespace as well as all core attributes for your account. It will indicate the type of each attribute and indicate whether it is part of the primary key for that namespace.
+Use this endpoint to fetch the schema for one of your namespaces. This will include all attributes, indicate the type of each attribute, and indicate whether it is part of the primary key for that namespace.
 
 ```javascript
 var cogs = require('cogs-sdk');
@@ -149,7 +149,7 @@ See [full CEP client documentation](https://github.com/cogswell-io/node-cogs-jav
 All of these routes are authenticated using the pubsub project_key. These keys are generated in the pubsub portion of the admin panel on Cogswell. Every key has an associated read_key, write_key, and admin_key. 
 
 ### cogs.pubsub.connect(keys, [options])
-This function will authenticate using the supplied project keys, and the connection will permit the read (subscribe), write (unsubscribe) and admin operations based on the supplied keys. It returns a promise which will either be completed with a ConnectionHandle or failed with a Throwable if the initial connection attempt failed.
+This function will authenticate using the supplied project keys, and the connection will permit read (subscribe), write (publish), and admin operations based on the supplied keys. It returns a promise which will either be completed with a connection handle or failed with an error if the initial connection attempt failed.
 
 ```javascript
 var cogs = require('cogs-sdk');
