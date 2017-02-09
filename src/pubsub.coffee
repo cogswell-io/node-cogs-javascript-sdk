@@ -8,7 +8,6 @@ request = require 'request'
 EventEmitter = require 'eventemitter3'
 
 auth = require './auth'
-config = require './config'
 errors = require './errors'
 logger = require './logger'
 WebSocket = require('./ws')()
@@ -24,12 +23,12 @@ class PubSubWebSocket extends EventEmitter
     super()
 
     @autoReconnectDelay = defaultReconnectDelay
-    @sessionUuid = @options.sessionUuid
-    @baseWsUrl = @options.baseWsUrl ? 'wss://api.cogswell.io'
-    @connectTimeout = @options.connectTimeout ? 5000
-    @autoReconnect = @options.autoReconnect ? true
-    @pingInterval = @options.pingInterval ? 15000
-    @logLevel = @options.logLevel ? 'error'
+    @sessionUuid = @options?.sessionUuid
+    @url = @options?.url ? 'wss://api.cogswell.io/pubsub'
+    @connectTimeout = @options?.connectTimeout ? 5000
+    @autoReconnect = @options?.autoReconnect ? true
+    @pingInterval = @options?.pingInterval ? 15000
+    @logLevel = @options?.logLevel ? 'error'
     @hasConnected = false
 
     logger.setLogLevel @logLevel
@@ -299,14 +298,13 @@ class PubSubWebSocket extends EventEmitter
           logger.info "Finished assembling auth data:\n
               #{JSON.stringify(data, null, 2)}"
 
-        url = "#{@baseWsUrl}/pubsub"
         headers =
           'Payload': data.bufferB64
           'PayloadHMAC': data.hmac
         timeout = @connectTimeout
 
         try
-          @sock = new WebSocket(url, headers, timeout)
+          @sock = new WebSocket(@url, headers, timeout)
 
           # The WebSocket was closed
           @sock.once 'close', (code, cause) =>
