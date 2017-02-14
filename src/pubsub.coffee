@@ -426,7 +426,7 @@ class PubSubWebSocket extends EventEmitter
 
                 if not promise?
                   message = 'Received a record containing an unknown sequence number.'
-                  setImmediate => @emit 'response-error', record
+                  setImmediate => @emit 'error-response', record
                   logger.error "#{message}: #{rec}"
                 else
                   # We must set this first, otherwise the cleanup handler
@@ -439,7 +439,7 @@ class PubSubWebSocket extends EventEmitter
                   if record.code == 200
                     resolve? record
                   else
-                    setImmediate => @emit 'response-error', record
+                    setImmediate => @emit 'error-response', record
                     reject?(new errors.PubSubFailureResponse(
                       record.message, null, record.code, record.details, record
                     ))
@@ -462,13 +462,13 @@ class PubSubWebSocket extends EventEmitter
                     id: id
 
               else if record.action == 'invalid-request'
-                setImmediate => @emit 'response-error', record
+                setImmediate => @emit 'error-response', record
                 logger.error "Server received a request which did not contain a sequence number:", record
 
               else
                 record.details = 'Valid, but un-handled response type.'
 
-                setImmediate => @emit 'response-error', record
+                setImmediate => @emit 'error-response', record
                 logger.error "#{message}"
 
           # WebSocket connection failure
