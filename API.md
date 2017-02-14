@@ -160,12 +160,12 @@ var adminKey = 'A-deadbeefdeadbeef-deadbeefdeadbeefdeadbeefdeadbeef'
 
 //All of the default options
 var options = {
-  sessionUuid: "", //Provide a session ID to restore an old connected session
+  sessionUuid: undefined, //Provide a session ID string to restore an old connected session
   url: 'wss://api.cogswell.io/pubsub',
   connectTimeout: 5000,
-  autoReconnect = true, //reconnect on failure
-  pingInterval = 15000, //frequency at which websocket pings
-  logLevel = 'error' //configurable logs for the SDK
+  autoReconnect: true, //reconnect on failure
+  pingInterval: 15000, //frequency at which websocket pings
+  logLevel: 'error' //configurable logs for the SDK
 }
 
 //This connection will have read, write, and admin permissions since all keys were provided

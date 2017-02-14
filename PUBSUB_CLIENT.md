@@ -112,7 +112,10 @@ The 'raw-record' event is emitted for every raw record received from the server,
 The 'message' event is emitted whenever the socket receives messages from any channel.
 
 ### Event: 'error'
-The 'error' event is emitted on any connection errors, failed publishes, etc.
+The 'error' event is emitted on any connection errors, failed publishes, or when any exception is thrown.
+
+### Event: 'error-response'
+The 'error-response' event is emitted whenever a message is sent to the user with an error status code.
 
 ### Event: 'reconnect'
 The 'reconnect' event is emitted on socket reconnection if it disconnected for any reason.
