@@ -43,6 +43,10 @@ class PubSubError extends CogsError
   constructor: (message, cause, statusCode, details) ->
     super message, cause, statusCode, details
 
+class PubSubResponseError extends CogsError
+  constructor: (code, details, action, message, sequence) ->
+    super message, cause, statusCode, details
+
 class PubSubFailureResponse extends PubSubError
   constructor: (message, cause, @code, details, @record) ->
     super message, cause, @code, details
