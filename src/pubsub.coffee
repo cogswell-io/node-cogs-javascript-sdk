@@ -280,8 +280,11 @@ class PubSubWebSocket extends EventEmitter
   close: ->
     @autoReconnect = false
 
-    @unsubscribeAll()
-    .finally => @dropConnection()
+    if @permissions.includes 'R'
+      @unsubscribeAll()
+      .finally => @dropConnection()
+    else
+      @dropConnection()
 
   # Alias to the close() method
   disconnect: -> @close()
@@ -293,6 +296,7 @@ class PubSubWebSocket extends EventEmitter
         resolve()
       else
         data = auth.socketAuth @keys, @sessionUuid
+        @permissions = data.permissions
 
         if data?
           logger.info "Finished assembling auth data:\n
