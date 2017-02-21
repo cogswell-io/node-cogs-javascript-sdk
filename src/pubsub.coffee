@@ -430,6 +430,8 @@ class PubSubWebSocket extends EventEmitter
 
                 if not promise?
                   message = 'Received a record containing an unknown sequence number.'
+                  record.sequence = record.seq
+                  delete record.seq
                   setImmediate => @emit 'error-response', record
                   logger.error "#{message}: #{rec}"
                 else
@@ -441,8 +443,14 @@ class PubSubWebSocket extends EventEmitter
                   {resolve, reject} = promise
 
                   if record.code == 200
-                    resolve? record
+                    #publishWithAck should only resolve with the message UUID
+                    if record.action == 'pub' && record.id?
+                      resolve? record.id
+                    else 
+                      resolve? record
                   else
+                    record.sequence = record.seq
+                    delete record.seq
                     setImmediate => @emit 'error-response', record
                     reject?(new errors.PubSubFailureResponse(
                       record.message, null, record.code, record.details, record
@@ -471,7 +479,8 @@ class PubSubWebSocket extends EventEmitter
 
               else
                 record.details = 'Valid, but un-handled response type.'
-
+                record.sequence = record.seq
+                delete record.seq
                 setImmediate => @emit 'error-response', record
                 logger.error "#{message}"
 
