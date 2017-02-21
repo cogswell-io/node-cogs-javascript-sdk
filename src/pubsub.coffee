@@ -273,18 +273,18 @@ class PubSubWebSocket extends EventEmitter
         @sock.close()
       catch error
         logger.error "Error while closing WebSocket:", error
+        throw error
       finally
         @sock = null
 
   # Shutdown the WebSocket for good (prevents subsequent auto-reconnect)
   close: ->
-    @autoReconnect = false
-
-    if @permissions.includes 'R'
-      @unsubscribeAll()
-      .finally => @dropConnection()
-    else
-      @dropConnection()
+    new P (resolve, reject) =>
+      @autoReconnect = false
+      try
+        resolve(@dropConnection())
+      catch error
+        reject(error)
 
   # Alias to the close() method
   disconnect: -> @close()
