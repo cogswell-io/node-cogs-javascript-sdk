@@ -87,19 +87,19 @@ var errorHandler = (err) => {
   //handle errors
 }
 
-connection.publish('channel', 'Hello World!')
-.then((sequence) => {
+connection.publishWithAck('channel', 'Hello World!')
+.then((messageUuid) => {
   //message successfully published
 })
 .catch(errorHandler);
 ```
 
 ## connection.close()
-Closes the pub/sub client handle by first requesting an unsubscribe from all channels, then closing the WebSocket. The result, if successful, contains a list of the channels to which the connection was subscribed for close was called.
+Closes the pub/sub client handle by closing the WebSocket.
 
 ```javascript
 connection.close()
-.then(unsubscribedChannels => {
+.then(() => {
 
 })
 ```
