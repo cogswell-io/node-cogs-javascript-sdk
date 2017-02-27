@@ -64,6 +64,7 @@ socketAuth = (keys, sessionUuid) ->
   auth = _(sigs).first()
   auth.hmac = hmac.toString 'hex'
   auth.json = auth.buffer.toString()
+  auth.permissions = record.permissions
   
   auth
 
