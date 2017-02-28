@@ -3,6 +3,7 @@
   - [connection.getSessionUuid()](#connectiongetsessionuuid)
   - [connection.subscribe(channelName, messageHandler)](#connectionsubscribechannelname-messagehandler)
   - [connection.unsubscribe(channelName)](#connectionunsubscribechannelname)
+  - [connection.unsubscribeAll()(#connectionunsubscribeall)
   - [connection.listSubscriptions()](#connectionlistsubscriptions)
   - [connection.publish(channelName, message, [errorHandler])](#connectionpublishchannelname-message-errorhandler)
   - [connection.publishWithAck(channelName, message)](#connectionpublishwithackchannelname-message)
@@ -32,7 +33,7 @@ connection.getSessionUuid()
 ## connection.subscribe(channelName, messageHandler)
 Subscribe to a channel, supplying a handler which will be called with each message received from this channel. The result, if successful, contains a list of the channels to which this connection is subscribed.
 
-The connection will need read permissions to be able to subscribe to a channel.
+The connection will need read permissions in order to subscribe to a channel.
 
 ```javascript
 var messageHandler = (message) => {
@@ -45,12 +46,21 @@ connection.subscribe('channel', messageHandler)
 });
 ```
 ## connection.unsubscribe(channelName)
-The connection will need read permissions to be able to subscribe to a channel.
+The connection will need read permissions in order to unsubscribe from a channel.
 
 ```javascript
 connection.unsubscribe('example-channel')
 .then(subscribedChannels => {
-  console.log(subscribedChannels); //This list will not include the example-channel channel
+  console.log(subscribedChannels); // This list will not include the example-channel channel
+});
+```
+## connection.unsubscribeAll()
+The connection will need read permission in order to unsubscribe from all channels.
+
+```javascript
+connection.unsubscribeAll()
+.then(previousChannels => {
+  console.log(previousChannels); // This is the list of channels to which we were subscribed prior to running this operation
 });
 ```
 
