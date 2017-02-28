@@ -3,7 +3,7 @@
   - [connection.getSessionUuid()](#connectiongetsessionuuid)
   - [connection.subscribe(channelName, messageHandler)](#connectionsubscribechannelname-messagehandler)
   - [connection.unsubscribe(channelName)](#connectionunsubscribechannelname)
-  - [connection.unsubscribeAll()(#connectionunsubscribeall)
+  - [connection.unsubscribeAll()](#connectionunsubscribeall)
   - [connection.listSubscriptions()](#connectionlistsubscriptions)
   - [connection.publish(channelName, message, [errorHandler])](#connectionpublishchannelname-message-errorhandler)
   - [connection.publishWithAck(channelName, message)](#connectionpublishwithackchannelname-message)
