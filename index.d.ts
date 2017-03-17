@@ -77,8 +77,8 @@ declare module "cogs-sdk" {
       autoReconnectDelay?: number;
     }
 
-    type ErrorResponseHandler = (PubSubErrorResponse) => void;
-    type MessageHandler = (MessageRecord) => void;
+    type ErrorResponseHandler = (response:PubSubErrorResponse) => void;
+    type MessageHandler = (record:MessageRecord) => void;
 
     function connect(keys: string[], options?: PubSubOptions): Promise<PubSubWebSocket>;
 
