@@ -25,7 +25,7 @@ validateWithJoi = (config) ->
     log_level: Joi.only('off', 'error', 'warn', 'info', 'verbose', 'debug').optional().default('error', 'Sets the log level for the SDK, defaults to "error"'),
     event_trace_key: Joi.string().min(1).optional('Auth key required in order to enable event tracing (intended for internal use only)')
   })
-  
+
   P.promisify(Joi.validate)(config, schema)
 
 # validate and supplement the config object

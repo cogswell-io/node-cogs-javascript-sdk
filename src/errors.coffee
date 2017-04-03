@@ -1,4 +1,3 @@
-
 class CogsError extends Error
   constructor: (@message, @cause, @statusCode, @details) ->
     super @message, @cause
