@@ -98,6 +98,99 @@ declare module "cogs-sdk" {
         }
     }
 
+    interface ApiKey {
+        secret: string;
+        access: string;
+    }
+
+    interface ClientKey {
+        secret: string;
+        salt: string;
+    }
+
+    interface HttpConfig {
+        http_request_timeout: number;
+        base_url: string;
+    }
+
+    interface WebsocketConfig {
+        websocket_connect_timeout: number;
+        base_ws_url: string;
+        websocket_auto_reconnect?: boolean;
+    }
+
+    interface Loggable {
+        log_level?: string;
+    }
+
+    export namespace ws {
+        //TODO
+
+        class WebSocket extends EventEmitter {
+            //TODO
+        }
+
+    }
+
+    export namespace api {
+        interface ApiClientConfig extends HttpConfig, WebsocketConfig, Loggable {
+            api_key: ApiKey;
+            client_key: ClientKey;
+        }
+
+        class PushWebSocket {
+            constructor(config: ApiClientConfig, namespace: string,
+                        attributes: object, autoAcknowledge?: boolean);
+
+            close(): void;
+            disconnect(): void;
+            //TODO
+            /*
+            ack(messageId: string): Promise<>;
+            acknowledge(messageId: string): Promise<>;
+            connect
+            */
+        }
+
+        class ApiClient {
+            constructor(config: ApiClientConfig);
+
+            baseUrl(): string;
+            baseWsUrl(): string;
+            accessKey(): string;
+            clientSalt(): string;
+            clientSecret(): string;
+
+            subscribe(namespace: string, attributes: object, autoAcknowledge?: boolean): PushWebSocket;
+        }
+
+        function getClient(configPath: string): Promise<ApiClient>;
+        function getClientWithConfig(config: ApiClientConfig): Promise<ApiClient>;
+    }
+
+    export namespace tools {
+        interface ToolsClientConfig extends HttpConfig, WebsocketConfig, Loggable {
+            api_key: ApiKey;
+        }
+
+        class ToolsClient {
+            constructor(config: ToolsClientConfig);
+
+            baseUrl(): string;
+            baseWsUrl(): string;
+            accessKey(): string;
+            secretKey(): string;
+
+            getApiClientWithNewKey(): Promise<api.ApiClient>;
+            getNamespaceSchema(): Promise<object>;
+            newRandomUuid(): Promise<string>;
+            newClientKey(): Promise<object>;
+            getNamespaceSchema(namespace: string): Promise<object>;
+        }
+
+        function getClient(configPath: string): Promise<ToolsClient>;
+        function getClientWithConfig(config: ToolsClientConfig): Promise<ToolsClient>;
+    }
 
     export namespace info {
 
@@ -114,7 +207,7 @@ declare module "cogs-sdk" {
             getStatus(): Promise<object>;
             getApiDocs(): Promise<object>;
             getBuildInfo(): Promise<object>;
-            makeRequest(method: string, path: string, data?: any): Promise<any>;
+            //makeRequest(method: string, path: string, data?: any): Promise<any>;
         }
 
         function getClient(configPath: string): Promise<InfoClient>;

@@ -92,7 +92,7 @@ module.exports =
     .then (cfg) ->
       logger.setLogLevel(cfg.log_level) if cfg.log_level?
       new ToolsClient(cfg)
-  
+
   getClientWithConfig: (cfg) ->
     logger.setLogLevel(cfg.log_level) if cfg.log_level?
     P.resolve(new ToolsClient(cfg))
