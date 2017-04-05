@@ -154,7 +154,7 @@ declare module "cogs-sdk" {
             client_key: ClientKey;
         }
 
-        class PushWebSocket {
+        class PushWebSocket extends EventEmitter {
             constructor(config: ApiClientConfig, namespace: string,
                         attributes: object, autoAcknowledge?: boolean);
 
@@ -182,6 +182,8 @@ declare module "cogs-sdk" {
             subscribe(namespace: string, attributes: object, autoAcknowledge?: boolean): PushWebSocket;
             sendEvent(namespace: string, eventName: string, attributes: object, options?: object): Promise<object>;
             getEventTrace(namespace: string, attributes: object, eventId: string): Promise<EventSendResponse>;
+            getChannelSummary(namespace: string, attributes: object): Promise<object>;
+            getMessage(namespace: string, topicAttributes: object, messageId: string): Promise<MessageRecord>;
         }
 
         function getClient(configPath: string): Promise<ApiClient>;
