@@ -214,6 +214,11 @@ declare module "cogs-sdk" {
             api_key: ApiKey;
         }
 
+        interface ClientKey {
+          client_salt: string;
+          client_secret: string;
+        }
+
         class ToolsClient {
             constructor(config: ToolsClientConfig);
 
@@ -223,10 +228,9 @@ declare module "cogs-sdk" {
             secretKey(): string;
 
             getApiClientWithNewKey(): Promise<api.ApiClient>;
-            getNamespaceSchema(): Promise<object>;
-            newRandomUuid(): Promise<string>;
-            newClientKey(): Promise<object>;
             getNamespaceSchema(namespace: string): Promise<object>;
+            newRandomUuid(): Promise<string>;
+            newClientKey(): Promise<ClientKey>;
         }
 
         function getClient(configPath: string): Promise<ToolsClient>;
