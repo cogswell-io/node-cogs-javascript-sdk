@@ -124,10 +124,27 @@ declare module "cogs-sdk" {
     }
 
     export namespace ws {
-        //TODO
 
-        class WebSocket extends EventEmitter {
-            //TODO
+        class BaseWS extends EventEmitter {
+            constructor(url: string, headers: object, timeout: number);
+        }
+
+        class NodeWS extends BaseWS {
+          constructor(url: string, headers: object, timeout: number);
+
+          close(): Promise<void>;
+          ping(): void;
+          send(data: object): Promise<void>;
+
+        }
+
+        class BrowserWS extends BaseWS {
+          constructor(url: string, headers: object, timeout: number);
+
+          close(): Promise<void>;
+          ping(): void;
+          send(data: object): Promise<void>;
+          
         }
     }
 
