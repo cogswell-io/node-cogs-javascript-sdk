@@ -170,6 +170,25 @@ declare module "cogs-sdk" {
             event_id: string;
         }
 
+        interface CepMessageRecord {
+            campaign_name: string;
+            campaign_id: number;
+            data?: string;
+            namespace: string;
+            event_name: string;
+            topic: object;
+            message_id: string;
+            ciid_hash: string;
+            url?: string;
+            notification_msg?: string;
+            forwarded_event? : {
+              namespace: string;
+              event_name: string;
+              attributes: object;
+              timestamp: Date;
+            }
+        }
+
         class ApiClient {
             constructor(config: ApiClientConfig);
 
@@ -183,7 +202,7 @@ declare module "cogs-sdk" {
             sendEvent(namespace: string, eventName: string, attributes: object, options?: object): Promise<object>;
             getEventTrace(namespace: string, attributes: object, eventId: string): Promise<EventSendResponse>;
             getChannelSummary(namespace: string, attributes: object): Promise<object>;
-            getMessage(namespace: string, topicAttributes: object, messageId: string): Promise<MessageRecord>;
+            getMessage(namespace: string, topicAttributes: object, messageId: string): Promise<CepMessageRecord>;
         }
 
         function getClient(configPath: string): Promise<ApiClient>;
