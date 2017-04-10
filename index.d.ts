@@ -199,8 +199,8 @@ declare module "cogs-sdk" {
             clientSecret(): string;
 
             subscribe(namespace: string, attributes: object, autoAcknowledge?: boolean): PushWebSocket;
-            sendEvent(namespace: string, eventName: string, attributes: object, options?: object): Promise<object>;
-            getEventTrace(namespace: string, attributes: object, eventId: string): Promise<EventSendResponse>;
+            sendEvent(namespace: string, eventName: string, attributes: object, options?: object): Promise<EventSendResponse>;
+            getEventTrace(namespace: string, attributes: object, eventId: string): Promise<object>;
             getChannelSummary(namespace: string, attributes: object): Promise<object>;
             getMessage(namespace: string, topicAttributes: object, messageId: string): Promise<CepMessageRecord>;
         }
