@@ -33,7 +33,7 @@ var attributes = {
 };
 var tags = ['foo', 'bar'];
 
-cepClient.sendEvent(namespace, eventName, attributes, tags);
+cepClient.sendEvent(namespace, eventName, attributes, tags)
 .then(() => {
   console.log('Event successfully sent.');
 })
@@ -91,7 +91,7 @@ var topicAttributes = {
 };
 
 new Promise((resolve, reject) => {
-  const ws = cepClient.subscribe(namespace, topicAttributes)) 
+  const ws = cepClient.subscribe(namespace, topicAttributes);
   
   ws.on('error', error => {
     console.error('Error in push WebSocket', error)
