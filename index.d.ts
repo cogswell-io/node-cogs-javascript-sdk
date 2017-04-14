@@ -80,15 +80,15 @@ declare module "cogs-sdk" {
         type ErrorResponseHandler = (response: PubSubErrorResponse) => void;
         type MessageHandler = (record: MessageRecord) => void;
 
-        function connect(keys: string[], options?: PubSubOptions): Promise<PubSubWebSocket>;
+        function connect(keys: string[], options?: PubSubOptions): Promise<PubSubHandle>;
 
-        class PubSubWebSocket extends EventEmitter {
+        class PubSubHandle extends EventEmitter {
             constructor(keys: string[], options?: PubSubOptions);
 
             getSessionUuid(): Promise<string>;
             publishWithAck(channel: string, message: string): Promise<string>;
             publish(channel: string, message: string, errorHandler?: ErrorResponseHandler): Promise<number>;
-            subscribe(channel: string, handler: MessageHandler): Promise<string[]>;
+            subscribe(channel: string, handler?: MessageHandler): Promise<string[]>;
             unsubscribe(channel: string): Promise<string[]>;
             unsubscribeAll(): Promise<string[]>;
             listSubscriptions(): Promise<string[]>;
@@ -123,39 +123,14 @@ declare module "cogs-sdk" {
         log_level?: string;
     }
 
-    export namespace ws {
-
-        class BaseWS extends EventEmitter {
-            constructor(url: string, headers: object, timeout: number);
-        }
-
-        class NodeWS extends BaseWS {
-          constructor(url: string, headers: object, timeout: number);
-
-          close(): Promise<void>;
-          ping(): void;
-          send(data: object): Promise<void>;
-
-        }
-
-        class BrowserWS extends BaseWS {
-          constructor(url: string, headers: object, timeout: number);
-
-          close(): Promise<void>;
-          ping(): void;
-          send(data: object): Promise<void>;
-          
-        }
-    }
-
-    export namespace api {
-        interface ApiClientConfig extends HttpConfig, WebsocketConfig, Loggable {
+    export namespace cep {
+        interface CepClientConfig extends HttpConfig, WebsocketConfig, Loggable {
             api_key: ApiKey;
             client_key: ClientKey;
         }
 
         class PushWebSocket extends EventEmitter {
-            constructor(config: ApiClientConfig, namespace: string,
+            constructor(config: CepClientConfig, namespace: string,
                         attributes: object, autoAcknowledge?: boolean);
 
             close(): void;
@@ -182,21 +157,15 @@ declare module "cogs-sdk" {
             url?: string;
             notification_msg?: string;
             forwarded_event? : {
-              namespace: string;
-              event_name: string;
-              attributes: object;
-              timestamp: Date;
+                namespace: string;
+                event_name: string;
+                attributes: object;
+                timestamp: Date;
             }
         }
 
-        class ApiClient {
-            constructor(config: ApiClientConfig);
-
-            baseUrl(): string;
-            baseWsUrl(): string;
-            accessKey(): string;
-            clientSalt(): string;
-            clientSecret(): string;
+        class CepClient {
+            constructor(config: CepClientConfig);
 
             subscribe(namespace: string, attributes: object, autoAcknowledge?: boolean): PushWebSocket;
             sendEvent(namespace: string, eventName: string, attributes: object, options?: object, debugDirective?: string): Promise<EventSendResponse>;
@@ -205,8 +174,8 @@ declare module "cogs-sdk" {
             getMessage(namespace: string, topicAttributes: object, messageId: string): Promise<CepMessageRecord>;
         }
 
-        function getClient(configPath: string): Promise<ApiClient>;
-        function getClientWithConfig(config: ApiClientConfig): Promise<ApiClient>;
+        function getClient(configPath: string): Promise<CepClient>;
+        function getClientWithConfig(config: CepClientConfig): Promise<CepClient>;
     }
 
     export namespace tools {
@@ -215,19 +184,14 @@ declare module "cogs-sdk" {
         }
 
         interface ClientKey {
-          client_salt: string;
-          client_secret: string;
+            client_salt: string;
+            client_secret: string;
         }
 
         class ToolsClient {
             constructor(config: ToolsClientConfig);
 
-            baseUrl(): string;
-            baseWsUrl(): string;
-            accessKey(): string;
-            secretKey(): string;
-
-            getApiClientWithNewKey(): Promise<api.ApiClient>;
+            getApiClientWithNewKey(): Promise<cep.CepClient>;
             getNamespaceSchema(namespace: string): Promise<object>;
             newRandomUuid(): Promise<string>;
             newClientKey(): Promise<ClientKey>;
@@ -248,11 +212,9 @@ declare module "cogs-sdk" {
         class InfoClient {
             constructor(cfg: InfoClientConfig);
 
-            baseUrl(): string;
             getStatus(): Promise<object>;
             getApiDocs(): Promise<object>;
             getBuildInfo(): Promise<object>;
-            //makeRequest(method: string, path: string, data?: any): Promise<any>;
         }
 
         function getClient(configPath: string): Promise<InfoClient>;
