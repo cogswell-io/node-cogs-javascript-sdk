@@ -120,7 +120,7 @@ cogs.tools.getClient('cogs-tools.json')
   return client.newClientKey();
 })
 .then((clientKey) => {
-  console.log(`New Cogs Client Key:\n${JSON.stringify(docs, null, 2)}`);
+  console.log(`New Cogs Client Key:\n${JSON.stringify(clientKey, null, 2)}`);
 })
 .catch((error) => {
   console.error(`Error generating new Cogs client key: ${error}\n${error.stack}`);

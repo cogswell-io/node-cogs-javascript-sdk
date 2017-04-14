@@ -159,13 +159,12 @@ class PushWebSocket extends EventEmitter
 
           # Received a message
           @sock.on 'message', (msg) =>
-            @emit 'message', msg
-
             logger.verbose "Received message from namespace '#{@namespace}' channel #{jsonify(@attributes)} :", msg
-
+            
             try
               @messageCount += 1
               message = JSON.parse msg
+              @emit 'message', message
               @lastMessageId = message.message_id
               @ack(message.message_id) if @autoAcknowledge == true
             catch error
